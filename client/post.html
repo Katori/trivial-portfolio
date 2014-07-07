@@ -1,0 +1,30 @@
+<!-- The post template, renders a post. -->
+<template name="post">
+	<div class="postContainer" id="{{_id}}">
+		{{#with postImage}}
+			<img src="{{url}}" class="leadingImage" alt="{{title}}"/>
+		{{/with}}
+		<div class="projectTitle">
+			<h2 class="projectTitle">{{title}}</h2>
+		</div>
+		<div class="projectTags">
+			<h2 class="projectTags">
+				<ul>
+					{{#each tags}}
+						<li>{{this}}</li>
+					{{/each}}
+				</ul>
+			</h2>
+		</div>
+		<div class="clear"></div>
+		<div class="projectDate">
+			<h3 class="timeSince">{{parsedDateCreated}}</h3>
+		</div>
+		<div class="entry"><p>{{entry}}</p></div>
+		<hr/>
+		<div class="completion">
+			<h3 class="completionPercentage">{{parsedCompletion}}</h3>
+			{{{pencil}}}
+		</div>
+	</div>
+</template>

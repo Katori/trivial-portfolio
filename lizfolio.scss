@@ -1,0 +1,275 @@
+// Font weight for most header fonts.
+$header-weight: 900;
+
+$bold-weight: 700;
+
+// Margins for mobile and tablet (obsolete).
+$mobile-margin: 10px;
+$tablet-margin: 30px;
+
+// Colors for various elements.
+$light-gray: #D8D8D8;
+
+// Pencil CSS! The height is universal, everything else is per-pencil.
+$pencilHeight: 50px;
+@mixin pencilify($imgSrc, $borderWidths, $sliceParams, $width){	
+	border-style: solid;
+	border-width: $borderWidths;
+	-moz-border-image: url($imgSrc) $sliceParams;
+	-webkit-border-image: url($imgSrc) $sliceParams;
+	-o-border-image: url($imgSrc) $sliceParams;
+	border-image: url($imgSrc) $sliceParams;
+	width: $width;
+	height: $pencilHeight;
+}
+
+// The pencil-specific CSS:
+.pencil{
+	display: inline-block;
+	vertical-align: middle;
+	&.justBegun{
+		@include pencilify('pencilJustBegun.png', 0px 179px 0px 141px, 0 179 0 141 fill repeat stretch, 75%);
+	}
+	&.workInProgress{
+		@include pencilify('pencilWIP.png', 0px 179px 0px 141px, 0 163 0 121 fill repeat stretch, 400px);
+	}
+	&.takingABreak{
+		@include pencilify('pencilTakingBreak.png', 0px 163px 0px 121px, 0 179 0 141 fill repeat stretch, 400px);
+	}
+	&.finished{
+		@include pencilify('pencilFinished.png', 0px 154px 0px 121px, 0 154 0 121 fill repeat stretch, 280px);
+	}
+}
+
+.clear{
+	clear: both;
+}
+
+.hide{
+	display: none;
+}
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+  margin: 0;
+ }
+
+// This design is phone-first.
+body{
+	// width: 90%;
+	// margin: 5%;
+	font-family: 'Avenir Next', 'Roboto', sans-serif;
+}
+
+.container{
+	width: 90%;
+	margin: 5%;
+}
+
+h1{
+	font-weight: $header-weight;
+	font-size: 34pt;
+	color: #5D5D5D;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+h2{
+	font-weight: $header-weight;
+	font-size: 22pt;
+	color: $light-gray;
+	margin-top: 0;
+	&.projectTitle{
+		font-size: 24pt;
+		color: #5D5D5D;
+	}
+	&.projectTags{
+		font-size: 18pt;
+		ul{
+			list-style: none;
+			padding: 0;
+			li{
+				display: inline;
+				&:after{
+					content:" | ";
+				}
+				&:last-child:after{
+					content:"";
+				}
+			}
+		}
+	}
+}
+
+h3{
+	font-weight: $header-weight;
+	font-size: 18pt;
+	color: #4A4A4A;
+	margin-bottom: 13px;
+	&.timeSince{
+		font-family: 'Roboto', sans-serif;
+		font-weight: 300;
+		font-size: 16pt;
+		font-style: italic;
+		color: #F5A623;
+	}
+	&.completionPercentage{
+		font-weight: $bold-weight;
+		color: #04994A;
+		display: inline-block;
+		vertical-align: middle;
+		margin: 0 20px;
+	}
+}
+
+p{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	font-size: 18pt;
+	color: #4A4A4A;
+}
+
+nav.smallMenu{
+	width: 100%;
+	text-align: center;
+	font-weight: $bold-weight;
+	font-size: 18pt;
+	height: 50px;
+	overflow: hidden;
+	border-bottom: 1px solid $light-gray;
+	margin: 20px 0;
+	color: $light-gray;
+	transition: 0.25s linear all;
+	&.open{
+		height: 160px;
+	}
+	img.mailMe{
+		float: right;
+		margin-right: 10px;
+	}
+	ul{
+		margin-top:15px;
+		list-style: none;
+		padding: 0;
+		li{
+			&.active{
+				color: #04994A;
+			}
+		}
+	}
+}
+
+nav.regularMenu{
+	display: none;
+}
+
+button#mailMe{
+	background-color: rgba(255,255,255,0);
+	border: 1px solid rgb(216,216,216);
+	border-radius: 10px;
+	padding: 10px 50px;
+	font-size: 18pt;
+	color: $light-gray;
+	font-weight: $bold-weight;
+	margin: 10px 0 15px;
+	img{
+		margin-left: 10px;
+		height: 22px;
+	}
+}
+
+.postContainer{
+	.leadingImage{
+		width: 100%;
+	}
+	.completion{
+		vertical-align: middle !important;
+		height:100px;
+	}
+	hr{
+		border: none;
+		border-bottom: 3px solid #F2F2F2;
+		margin: 30px 0;
+	}
+}
+
+.adminArea{
+	form{
+		input.projectTitle{
+			font-size: 24pt;
+			width: 500px;
+		}
+		textarea.projectDescription{
+			font-size: 12pt;
+			width: 500px;
+		}
+	}
+	#fileupload{
+		color: white;
+		background-color: blue;
+		padding: 10px;
+	}
+}
+
+footer{
+	width: 100%;
+	text-align: center;
+	margin: 30px 0;
+}
+
+@media (min-width: 900px){
+	.container{
+	}
+	.pencil{
+		&.justBegun{
+			width: 790px;
+		}
+	}
+	body{
+		width: 900px;
+		margin: 0 auto;
+	}
+	.postContainer{
+		div.projectTitle{
+			float: left;
+			width: 50%;
+		}
+		div.projectTags{
+			float: right;
+			width: 50%;
+			text-align: right;
+		}
+	}
+	header{
+		float: left;
+		margin-top: 30px;
+	}
+	nav.smallMenu{
+		display: none;
+	}
+	nav.regularMenu{
+		margin-top: 35px;
+		float: right;
+		display: block;
+		.pencil{
+			margin-bottom: 10px;
+		}
+		ul{
+			list-style: none;
+			font-weight: $bold-weight;
+			font-size: 18pt;
+			color: $light-gray;
+			padding: 0;
+			li{
+				display: inline;
+				margin-right: 30px;
+				&:last-child{
+					margin-right: 0;
+				}
+				&.active{
+					color: #04994A;
+				}
+			}
+		}
+	}
+}

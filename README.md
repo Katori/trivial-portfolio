@@ -1,4 +1,4 @@
-trivial-portfolio
+trivial-portfolio 0.1
 =================
 A very simple portfolio CMS implemented in Meteor, by Zac North ([@kato](https://twitter.com/kato)).
 

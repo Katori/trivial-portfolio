@@ -1,0 +1,12 @@
+{
+  "packages": {
+    "iron-router": {},
+    "scss": {},
+    "blueimp-file-upload": {},
+    "collectionFS": {},
+    "cfs-ui": {},
+    "moment": {},
+    "fastclick": {},
+    "velocityjs": {}
+  }
+}

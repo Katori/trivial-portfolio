@@ -1,0 +1,36 @@
+<head>
+	<title>lizfolio</title>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+</head>
+<body>
+</body>
+
+<!-- The main template. Contains menu and posts.-->
+<template name="home">
+	<!-- Insert the small menu template, used on mobile: -->
+	{{> smallMenu}}
+	<div class="container">
+		<header>
+			<h1>Liz Lara</h1>
+			<h2>UX Developer | Illustrator</h2>
+		</header>
+		<!-- Insert the regular menu template, used elsewhere: -->
+		{{> regularMenu}}		
+		<div class="clear"></div>
+		<!-- Insert the "Hire Me" button, but only when it's not mobile: -->
+		{{#unless isSmall}}
+			<button id="mailMe">Hire Me <img class="mailMe" src="./mailMe.png"/></button>
+		{{/unless}}
+		<br/>
+		{{#each posts}}
+			{{> post}}
+			<!-- Post Administration Area -->
+			{{#if isAdmin}}
+				<div class="adminTools"><button disabled>Edit Post</button> | <button class="deleteButton">Delete Post</button></div>
+			{{/if}}
+			<!-- /Post Administration Area -->
+		{{/each}}
+	</div>
+	{{> footer}}
+</template>

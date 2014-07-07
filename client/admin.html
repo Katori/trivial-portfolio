@@ -1,0 +1,42 @@
+<!-- Admin template, right now contains post creation tools. -->
+<template name="admin">
+	<h1>lizfolio admin</h1>
+	{{> loginButtons}}
+	{{userInfo}}
+	{{#if isAdmin}}
+		<div class="adminArea">
+			<h2>admin tools</h2>
+			<h3>create a new project</h3>
+			<form id="newProject" class="newProject">
+				<input type="text" id="newProjectTitle" class="projectTitle" name="projectTitle" placeholder="Project Title"/><br/>
+				<input type="text" id="newProjectTags" class="projectTags" name="projectTags" placeholder="Project Tags (comma separated)"/><br/>
+				<textarea class="projectDescription" id="newProjectDescription" name="projectDescription" rows="10" placeholder="Project Description"></textarea><br/>
+				<label for="projectDate">Date of Project: </label>
+				<input type="checkbox" id="newProjectIsToday" checked name="projectDate"/>
+				<label for="projectDate">Today</label> <input id="newProjectDate" class="hide" type="date"/><br/>
+				<label for="projectCompletion">Percentage Completed: </label>
+				<input id="newProjectCompletion" class="projectCompletion" name="projectCompletion" type="number" max="100" min="0" step="1" placeholder="0-100"/>
+				<br/>
+				<label for="newProjectStatus">Project Status:</label>
+				<select id="newProjectStatus">
+					<option value="justBegun">
+						Just Begun
+					</option>
+					<option value="workInProgress">
+						Work in Progress
+					</option>
+					<option value="takingABreak">
+						Taking A Break
+					</option>
+					<option value="completed">
+						Finished!
+					</option>
+				</select><br/>
+				<label for="newProjectFileInput">Upload image:</label>
+				<input id="newProjectFileInput" class="myFileInput" type="file"/>{{> FS.UploadProgressBar}}
+				<br/><br/>
+				<input type="submit" class="inputPostSubmit" name="postSubmit" value="Create Post"/>
+			</form>
+		</div>
+	{{/if}}
+</template>
