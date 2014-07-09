@@ -1,5 +1,21 @@
 var imgId;
 
+Template.admin.helpers({
+	posts: function(e){
+		// display posts, sorted by date created
+		var postsToRender = Posts.find({},{sort:{date_created: -1}});
+		return postsToRender;
+	},
+	parsedDateCreated: function (e){
+		return moment(this.date_created,"X").fromNow();
+	}
+});
+
+Template.admin.selected_post = function(){
+	var post = Posts.findOne(Session.get('selectedPostToEditId'));
+	return post && post.title;
+}
+
 Template.admin.events({
 	// Upload the file when the file input is activated, to be ready when the user submits the post.
 	'change .myFileInput': function(e){
@@ -47,5 +63,32 @@ Template.admin.events({
 		else{
 			$('#newProjectDate').removeClass("hide")	
 		}
+	},
+	'click .drawerButton': function(e){
+		e.preventDefault();
+		// Grab the ID of the drawer to open:
+		var drawerId = $(e.target).attr('id');
+		// Store the target drawer's content div selector:
+		var drawerTarget = '#'+drawerId+'.drawerContents';
+		if($(drawerTarget).hasClass('open')){
+			$(drawerTarget).removeClass('open');
+		}
+		else{
+			$(drawerTarget).addClass('open');
+		}
+
+		// $(drawerTarget).css('height', 'auto');
+		// var targetHeight=$(drawerTarget).css('height');
+		// console.log("auto height completed, set to: "+targetHeight)
+		// $(drawerTarget).css('height', '0');
+		// console.log("height reset to 0");
+		// $(drawerTarget).css('height', targetHeight);
+		// console.log("height set to target height");
+		// $(drawerTarget).css('height', '453px');
+	},
+	'click .editLink': function(e){
+		e.preventDefault();
+		Session.set("selectedPostToEditId",this._id);
+		console.log(Session.get("selectedPostToEditId"));
 	}
 })

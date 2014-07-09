@@ -209,6 +209,25 @@ button#mailMe{
 		background-color: blue;
 		padding: 10px;
 	}
+	.drawerContents{
+		overflow: hidden;
+		// height: 0;
+		transition: 0.25s linear all;
+		max-height: 0px;
+		&.open{
+			max-height: 1000px;
+		}
+	}
+}
+
+.editArea{
+	height: 440px;
+	transition: 0.25s linear all;
+	overflow: hidden;
+	&.hidden{
+		
+		height: 0;
+	}
 }
 
 footer{

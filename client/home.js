@@ -1,4 +1,5 @@
 var smallMenuOpen = false;
+var isEditing = false;
 
 isUserAdmin = function(){
 	// grab user's admin status as soon as it's available, useful in templates
@@ -42,6 +43,15 @@ Template.home.isAdmin = function(){
 	return isUserAdmin();
 }
 
+Template.home.editPost = function(){
+	if(isEditing){
+		return true;
+	}
+	else{
+		return false
+	}
+}
+
 Template.home.events({
 	// Deletion confirmation and deletion event.
 	'click .deleteButton': function(e){
@@ -60,6 +70,28 @@ Template.home.events({
 		else{
 			$('nav.smallMenu').addClass('open');
 		}
+	},
+	'click .editButton': function(e){
+		e.preventDefault();
+		// isEditing = true;
+		var editArea = '#'+this._id+'.editArea';
+		if($(editArea).hasClass('hidden')){
+			$(editArea).removeClass('hidden');
+		}
+		else{
+			$(editArea).addClass('hidden');
+		}
+		
+		// This block will update the post eventually:
+		/* Posts.update(this._id,{
+			title:titleValue,
+			tags:tagsArray,
+			entry:descriptionValue,
+			completion:completionValue,
+			status:statusValue,
+			date_created:dateCompleted,
+			imageId: imgId
+		});*/
 	}
 });
 
