@@ -16,39 +16,14 @@
 			{{> post}}
 			<!-- Post Administration Area -->
 			{{#if isAdmin}}
-				<div class="adminTools"><button class="editButton">Edit Post</button> | <button class="deleteButton">Delete Post</button></div>
+				{{> adminTools}}
 			{{/if}}
 			<!-- /Post Administration Area -->
-			<div id="{{_id}}" class="editArea hidden">
-				<form id="{{_id}}" class="editProject">
-					<input type="text" id="editProjectTitle" class="projectTitle" name="projectTitle" placeholder="Project Title"/><br/>
-					<input type="text" id="newProjectTags" class="projectTags" name="projectTags" placeholder="Project Tags (comma separated)"/><br/>
-					<textarea class="projectDescription" id="newProjectDescription" name="projectDescription" rows="10" placeholder="Project Description"></textarea><br/>
-					<label for="projectDate">Date of Project: </label>
-					<input id="newProjectDate" class="" type="date"/><br/>
-					<label for="projectCompletion">Percentage Completed: </label>
-					<input id="newProjectCompletion" class="projectCompletion" name="projectCompletion" type="number" max="100" min="0" step="1" placeholder="0-100"/>
-					<br/>
-					<label for="newProjectStatus">Project Status:</label>
-					<select id="newProjectStatus">
-						<option value="justBegun">
-							Just Begun
-						</option>
-						<option value="workInProgress">
-							Work in Progress
-						</option>
-						<option value="takingABreak">
-							Taking A Break
-						</option>
-						<option value="completed">
-							Finished!
-						</option>
-					</select><br/>
-					<br/><br/>
-					<input type="submit" class="editPostSubmit" name="postSubmit" value="Submit Edit"/>
-				</form>
-			</div>
 		{{/each}}
 	</div>
 	{{> footer}}
+</template>
+
+<template name="adminTools">
+	<div class="adminTools"><button class="editButton">Edit Post</button> | <button class="deleteButton">Delete Post</button></div>
 </template>

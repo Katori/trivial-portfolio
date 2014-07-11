@@ -1,4 +1,3 @@
-var smallMenuOpen = false;
 var isEditing = false;
 
 isUserAdmin = function(){
@@ -24,19 +23,11 @@ Template.home.rendered = function() {
 
 Template.home.posts = function () {
 	// display posts, sorted by date created
-	var postsToRender = Posts.find({},{sort:{date_created: -1}});
-	return postsToRender;
+	return Posts.find({},{
+		sort:{date_created: -1},
+		limit: 2
+	});
 };
-
-Template.home.isSmall = function(){
-	// Detect if the window is mobile sized. Useful for inserting things based on mobile or not.
-	if($(window).width()<=900){
-		return true
-	}
-	else{
-		return false
-	}
-}
 
 Template.home.isAdmin = function(){
 	// Get admin status on homepage.
@@ -52,7 +43,19 @@ Template.home.editPost = function(){
 	}
 }
 
-Template.home.events({
+Template.smallMenu.events({
+		'click .smallMenu':function(e){
+		// If mobile menu is open when clicked, close it. Else, open it.
+		if($('nav.smallMenu').hasClass('open')){
+			$('nav.smallMenu').removeClass('open');
+		}
+		else{
+			$('nav.smallMenu').addClass('open');
+		}
+	}
+});
+
+Template.adminTools.events({
 	// Deletion confirmation and deletion event.
 	'click .deleteButton': function(e){
 		e.preventDefault();
@@ -61,27 +64,11 @@ Template.home.events({
 		}
 		else{
 		}
-	},
-	'click .smallMenu':function(e){
-		// If mobile menu is open when clicked, close it. Else, open it.
-		if($('nav.smallMenu').hasClass('open')){
-			$('nav.smallMenu').removeClass('open');
-		}
-		else{
-			$('nav.smallMenu').addClass('open');
-		}
-	},
+	}
+});
+
+Template.home.events({
 	'click .editButton': function(e){
-		e.preventDefault();
-		// isEditing = true;
-		var editArea = '#'+this._id+'.editArea';
-		if($(editArea).hasClass('hidden')){
-			$(editArea).removeClass('hidden');
-		}
-		else{
-			$(editArea).addClass('hidden');
-		}
-		
 		// This block will update the post eventually:
 		/* Posts.update(this._id,{
 			title:titleValue,

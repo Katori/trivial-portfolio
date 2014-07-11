@@ -3,18 +3,15 @@ var imgId;
 Template.admin.helpers({
 	posts: function(e){
 		// display posts, sorted by date created
-		var postsToRender = Posts.find({},{sort:{date_created: -1}});
-		return postsToRender;
+		return Posts.find({},{sort:{date_created: -1}});
 	},
 	parsedDateCreated: function (e){
 		return moment(this.date_created,"X").fromNow();
+	},
+	selected_post: function(){
+		return Posts.findOne(Session.get('selectedPostToEditId'));
 	}
 });
-
-Template.admin.selected_post = function(){
-	var post = Posts.findOne(Session.get('selectedPostToEditId'));
-	return post && post.title;
-}
 
 Template.admin.events({
 	// Upload the file when the file input is activated, to be ready when the user submits the post.
