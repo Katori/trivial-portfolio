@@ -1,4 +1,5 @@
 var imgId;
+var post;
 
 Template.admin.helpers({
 	posts: function(e){
@@ -9,7 +10,11 @@ Template.admin.helpers({
 		return moment(this.date_created,"X").fromNow();
 	},
 	selected_post: function(){
-		return Posts.findOne(Session.get('selectedPostToEditId'));
+		if(Session.get('selectedPostToEditId')){
+			post.date = moment(post.date_created,"X").format("YYYY-MM-DD");
+			$("#editPostForm select option[value='"+post.status+"']").attr("selected","selected");
+			return post;
+		}
 	}
 });
 
@@ -86,6 +91,7 @@ Template.admin.events({
 	'click .editLink': function(e){
 		e.preventDefault();
 		Session.set("selectedPostToEditId",this._id);
-		console.log(Session.get("selectedPostToEditId"));
+		post = Posts.findOne(Session.get('selectedPostToEditId'));
+		// $("#editPostForm select option[value='"+post.status+"']").attr("selected","selected");
 	}
 })
