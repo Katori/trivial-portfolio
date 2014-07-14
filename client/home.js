@@ -1,4 +1,4 @@
-var smallMenuOpen = false;
+var isEditing = false;
 
 isUserAdmin = function(){
 	// grab user's admin status as soon as it's available, useful in templates
@@ -23,26 +23,45 @@ Template.home.rendered = function() {
 
 Template.home.posts = function () {
 	// display posts, sorted by date created
-	var postsToRender = Posts.find({},{sort:{date_created: -1}});
-	return postsToRender;
+	return Posts.find({},{
+		sort:{date_created: -1},
+		limit: 2
+	});
 };
-
-Template.home.isSmall = function(){
-	// Detect if the window is mobile sized. Useful for inserting things based on mobile or not.
-	if($(window).width()<=900){
-		return true
-	}
-	else{
-		return false
-	}
-}
 
 Template.home.isAdmin = function(){
 	// Get admin status on homepage.
 	return isUserAdmin();
 }
 
-Template.home.events({
+Template.home.editPost = function(){
+	if(isEditing){
+		return true;
+	}
+	else{
+		return false
+	}
+}
+
+Template.smallMenu.events({
+		'click .smallMenu':function(e){
+		// If mobile menu is open when clicked, close it. Else, open it.
+		if($('nav.smallMenu').hasClass('open')){
+			$('nav.smallMenu').removeClass('open');
+		}
+		else{
+			$('nav.smallMenu').addClass('open');
+		}
+	}
+});
+
+Template.adminTools.events({
+	'click .editButton': function(e){
+		// Set the session variable of the post to edit and take users to the admin page.
+		e.preventDefault();
+		Session.set("selectedPostToEditId",this._id)
+		Router.go("admin");
+	},
 	// Deletion confirmation and deletion event.
 	'click .deleteButton': function(e){
 		e.preventDefault();
@@ -50,15 +69,6 @@ Template.home.events({
 			Posts.remove(this._id);	
 		}
 		else{
-		}
-	},
-	'click .smallMenu':function(e){
-		// If mobile menu is open when clicked, close it. Else, open it.
-		if($('nav.smallMenu').hasClass('open')){
-			$('nav.smallMenu').removeClass('open');
-		}
-		else{
-			$('nav.smallMenu').addClass('open');
 		}
 	}
 });

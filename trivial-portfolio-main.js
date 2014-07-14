@@ -12,6 +12,7 @@ Router.map(function(){
 		path:'/'
 	});
 	this.route('admin');
+	this.route('work');
 });
 
 if(Meteor.isClient){

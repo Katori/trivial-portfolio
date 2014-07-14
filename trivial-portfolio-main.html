@@ -11,26 +11,19 @@
 	<!-- Insert the small menu template, used on mobile: -->
 	{{> smallMenu}}
 	<div class="container">
-		<header>
-			<h1>Liz Lara</h1>
-			<h2>UX Developer | Illustrator</h2>
-		</header>
-		<!-- Insert the regular menu template, used elsewhere: -->
-		{{> regularMenu}}		
-		<div class="clear"></div>
-		<!-- Insert the "Hire Me" button, but only when it's not mobile: -->
-		{{#unless isSmall}}
-			<button id="mailMe">Hire Me <img class="mailMe" src="./mailMe.png"/></button>
-		{{/unless}}
-		<br/>
+		{{ > header}}
 		{{#each posts}}
 			{{> post}}
 			<!-- Post Administration Area -->
 			{{#if isAdmin}}
-				<div class="adminTools"><button disabled>Edit Post</button> | <button class="deleteButton">Delete Post</button></div>
+				{{> adminTools}}
 			{{/if}}
 			<!-- /Post Administration Area -->
 		{{/each}}
 	</div>
 	{{> footer}}
+</template>
+
+<template name="adminTools">
+	<div class="adminTools"><button class="editButton">Edit Post</button> | <button class="deleteButton">Delete Post</button></div>
 </template>

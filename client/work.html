@@ -1,0 +1,16 @@
+<template name="work">
+	<!-- Insert the small menu template, used on mobile: -->
+	{{> smallMenu}}
+	<div class="container">
+		{{ > header}}
+		{{#each posts}}
+			{{> post}}
+			<!-- Post Administration Area -->
+			{{#if isAdmin}}
+				{{> adminTools}}
+			{{/if}}
+			<!-- /Post Administration Area -->
+		{{/each}}
+	</div>
+	{{> footer}}
+</template>

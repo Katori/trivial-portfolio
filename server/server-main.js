@@ -1,5 +1,5 @@
 // The user IDs of the site administrators. These can be gained through various methods (console.log).
-var siteAdminsIds=["onT3dEMCGKtMZAjcz","yWeg8Re8jxz9YGfyF","rvexnwidAA5JTZjYA"];
+var siteAdminsIds=["onT3dEMCGKtMZAjcz","yWeg8Re8jxz9YGfyF","rvexnwidAA5JTZjYA","QritvqMDfwRLhBfj5","PKQ6QMQJA4FEaAsMX"];
 
 Meteor.methods({
 });

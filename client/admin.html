@@ -1,42 +1,103 @@
-<!-- Admin template, right now contains post creation tools. -->
+<!-- Admin template, right now contains post creation and post editing tools. -->
 <template name="admin">
-	<h1>lizfolio admin</h1>
+	<h1><a href="{{pathFor 'home'}}">lizfolio</a> admin</h1>
 	{{> loginButtons}}
 	{{userInfo}}
 	{{#if isAdmin}}
 		<div class="adminArea">
 			<h2>admin tools</h2>
-			<h3>create a new project</h3>
-			<form id="newProject" class="newProject">
-				<input type="text" id="newProjectTitle" class="projectTitle" name="projectTitle" placeholder="Project Title"/><br/>
-				<input type="text" id="newProjectTags" class="projectTags" name="projectTags" placeholder="Project Tags (comma separated)"/><br/>
-				<textarea class="projectDescription" id="newProjectDescription" name="projectDescription" rows="10" placeholder="Project Description"></textarea><br/>
-				<label for="projectDate">Date of Project: </label>
-				<input type="checkbox" id="newProjectIsToday" checked name="projectDate"/>
-				<label for="projectDate">Today</label> <input id="newProjectDate" class="hide" type="date"/><br/>
-				<label for="projectCompletion">Percentage Completed: </label>
-				<input id="newProjectCompletion" class="projectCompletion" name="projectCompletion" type="number" max="100" min="0" step="1" placeholder="0-100"/>
-				<br/>
-				<label for="newProjectStatus">Project Status:</label>
-				<select id="newProjectStatus">
-					<option value="justBegun">
-						Just Begun
-					</option>
-					<option value="workInProgress">
-						Work in Progress
-					</option>
-					<option value="takingABreak">
-						Taking A Break
-					</option>
-					<option value="completed">
-						Finished!
-					</option>
-				</select><br/>
-				<label for="newProjectFileInput">Upload image:</label>
-				<input id="newProjectFileInput" class="myFileInput" type="file"/>{{> FS.UploadProgressBar}}
-				<br/><br/>
-				<input type="submit" class="inputPostSubmit" name="postSubmit" value="Create Post"/>
-			</form>
+			<h3>
+				<a href="#" class="drawerButton" id="newProject">></a>
+				 create a new project
+			</h3>
+			<div class="drawerContents" id="newProject">
+				<form id="newProject" class="newProject">
+					<input type="text" id="newProjectTitle" class="projectTitle" name="projectTitle" placeholder="Project Title"/><br/>
+					<input type="text" id="newProjectTags" class="projectTags" name="projectTags" placeholder="Project Tags (comma separated)"/><br/>
+					<textarea class="projectDescription" id="newProjectDescription" name="projectDescription" rows="10" placeholder="Project Description"></textarea><br/>
+					<label for="projectDate">Date of Project: </label>
+					<input type="checkbox" id="newProjectIsToday" checked name="projectDate"/>
+					<label for="projectDate">Today</label> <input id="newProjectDate" class="hide" type="date"/><br/>
+					<label for="projectCompletion">Percentage Completed: </label>
+					<input id="newProjectCompletion" class="projectCompletion" name="projectCompletion" type="number" max="100" min="0" step="1" placeholder="0-100"/>
+					<br/>
+					<label for="newProjectStatus">Project Status:</label>
+					<select id="newProjectStatus">
+						<option value="justBegun">
+							Just Begun
+						</option>
+						<option value="workInProgress">
+							Work in Progress
+						</option>
+						<option value="takingABreak">
+							Taking A Break
+						</option>
+						<option value="completed">
+							Finished!
+						</option>
+					</select><br/>
+					<label for="newProjectFileInput">Upload image:</label>
+					<input id="newProjectFileInput" class="myFileInput" type="file"/>{{> FS.UploadProgressBar}}
+					<br/><br/>
+					<input type="submit" class="inputPostSubmit" name="postSubmit" value="Create Post"/>
+				</form>
+			</div>
+			<h3>
+				<a href="#" class="drawerButton" id="editProject">></a>
+				 edit a project
+			</h3>
+			<div class="drawerContents" id="editProject">
+				<table>
+					<tr>
+						<td>
+							Post Name
+						</td>
+						<td>
+							Post Date
+						</td>
+					</tr>
+					{{#each posts}}
+						<tr>
+							<td>
+								<a href="#" class="editLink">{{title}}</a>
+							</td>
+							<td>
+								{{parsedDateCreated}}
+							</td>
+						</tr>
+					{{/each}}
+				</table>
+				<h4>edit area</h4>
+				{{#if selected_post}}
+					<form id="editPostForm">
+						<input value="{{selected_post.title}}" class="projectTitle" id="editTitle" type="text"/><br/>
+						<input value="{{selected_post.tags}}" class="projectTags" id="editTags" type="text"/><br/>
+						<textarea class="projectDescription" id="editDescription" rows="10" placeholder="Project Description">{{selected_post.entry}}</textarea><br/>
+						<label for="projectDate">Date of Project: </label>
+						<input id="editDate" class="" type="date" value="{{selected_post.date}}"/><br/>
+						<label for="editProjectCompletion">Percentage Completed: </label>
+						<input id="editProjectCompletion" class="projectCompletion" name="projectCompletion" type="number" max="100" min="0" step="1" placeholder="0-100" value="{{selected_post.completion}}"/><br/>
+						<label for="editProjectStatus">Project Status:</label>
+						<select id="editProjectStatus">
+							<option value="justBegun">
+								Just Begun
+							</option>
+							<option value="workInProgress">
+								Work in Progress
+							</option>
+							<option value="takingABreak">
+								Taking A Break
+							</option>
+							<option value="completed">
+								Finished!
+							</option>
+						</select><br/>
+						<input type="submit" class="editPostSubmit" name="postSubmit" value="Save edits"/>
+					</form>
+				{{else}}
+					<h4>Click a post to select</h4>
+				{{/if}}
+			</div>
 		</div>
 	{{/if}}
 </template>
