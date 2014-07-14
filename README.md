@@ -23,7 +23,7 @@ To practice with Meteor, and demonstrate front-end skills that I have been worki
 ### Version 0.2
 * First user that signs in is admin
 * Create/delete admins from the admin area
-* Edit posts
+* ~~Edit posts~~
 * Pagination for posts
 * Real tags for posts (right now tags are only stored)
 
