@@ -20,6 +20,7 @@ But at least it has a fully responsive, phone-first theme.
 ## Why did you do this?
 To practice with Meteor, and demonstrate front-end skills that I have been working on (mainly SCSS). I am still very much a Meteor novice and would love to hear any comments or criticism.
 ## Roadmap
+Features currently completed are ~~struckthrough~~
 ### Version 0.2
 * First user that signs in is admin
 * Create/delete admins from the admin area

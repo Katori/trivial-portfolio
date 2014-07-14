@@ -1,4 +1,4 @@
-<!-- Admin template, right now contains post creation tools. -->
+<!-- Admin template, right now contains post creation and post editing tools. -->
 <template name="admin">
 	<h1><a href="{{pathFor 'home'}}">lizfolio</a> admin</h1>
 	{{> loginButtons}}
@@ -70,15 +70,15 @@
 				<h4>edit area</h4>
 				{{#if selected_post}}
 					<form id="editPostForm">
-						<input value="{{selected_post.title}}" class="projectTitle" type="text"/><br/>
-						<input value="{{selected_post.tags}}" class="projectTags" type="text"/><br/>
-						<textarea class="projectDescription" rows="10" placeholder="Project Description">{{selected_post.entry}}</textarea><br/>
+						<input value="{{selected_post.title}}" class="projectTitle" id="editTitle" type="text"/><br/>
+						<input value="{{selected_post.tags}}" class="projectTags" id="editTags" type="text"/><br/>
+						<textarea class="projectDescription" id="editDescription" rows="10" placeholder="Project Description">{{selected_post.entry}}</textarea><br/>
 						<label for="projectDate">Date of Project: </label>
-						<input id="newProjectDate" class="" type="date" value="{{selected_post.date}}"/><br/>
+						<input id="editDate" class="" type="date" value="{{selected_post.date}}"/><br/>
 						<label for="editProjectCompletion">Percentage Completed: </label>
 						<input id="editProjectCompletion" class="projectCompletion" name="projectCompletion" type="number" max="100" min="0" step="1" placeholder="0-100" value="{{selected_post.completion}}"/><br/>
-						<label for="newProjectStatus">Project Status:</label>
-						<select id="newProjectStatus">
+						<label for="editProjectStatus">Project Status:</label>
+						<select id="editProjectStatus">
 							<option value="justBegun">
 								Just Begun
 							</option>

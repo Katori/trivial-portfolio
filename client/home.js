@@ -56,6 +56,12 @@ Template.smallMenu.events({
 });
 
 Template.adminTools.events({
+	'click .editButton': function(e){
+		// Set the session variable of the post to edit and take users to the admin page.
+		e.preventDefault();
+		Session.set("selectedPostToEditId",this._id)
+		Router.go("admin");
+	},
 	// Deletion confirmation and deletion event.
 	'click .deleteButton': function(e){
 		e.preventDefault();
@@ -64,21 +70,6 @@ Template.adminTools.events({
 		}
 		else{
 		}
-	}
-});
-
-Template.home.events({
-	'click .editButton': function(e){
-		// This block will update the post eventually:
-		/* Posts.update(this._id,{
-			title:titleValue,
-			tags:tagsArray,
-			entry:descriptionValue,
-			completion:completionValue,
-			status:statusValue,
-			date_created:dateCompleted,
-			imageId: imgId
-		});*/
 	}
 });
 
