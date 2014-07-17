@@ -12,8 +12,15 @@ Meteor.startup(function () {
 		var titles = ["Portfolio Piece 1", "Portfolio Piece 2"];
 		var entries = ["This is one portfolio entry lorem ipsum dolor",
 		"This is another portfolio entry lorem ipsum dolor blah blah blah"];
+		var completions = ["77","100"]
+		var statii = ["workInProgress","completed"];
 		for (var i=0; i < titles.length; i++){
-			Posts.insert({title: titles[i],entry: entries[i]});
+			Posts.insert({
+				title: titles[i],
+				entry: entries[i],
+				completion: completions[i],
+				status: statii[i]
+			});
 		}
 	}
 });

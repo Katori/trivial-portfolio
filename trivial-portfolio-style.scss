@@ -11,7 +11,7 @@ $tablet-margin: 30px;
 $light-gray: #D8D8D8;
 
 // Pencil CSS! The height is universal, everything else is per-pencil.
-$pencilHeight: 50px;
+$pencilHeight: 25px;
 @mixin pencilify($imgSrc, $borderWidths, $sliceParams, $width){	
 	border-style: solid;
 	border-width: $borderWidths;
@@ -28,16 +28,16 @@ $pencilHeight: 50px;
 	display: inline-block;
 	vertical-align: middle;
 	&.justBegun{
-		@include pencilify('pencilJustBegun.png', 0px 179px 0px 141px, 0 179 0 141 fill repeat stretch, 75%);
+		@include pencilify('pencilJustBegun.png', 0px 75px 0px 61px, 0 75 0 61 fill repeat stretch, 75%);
 	}
 	&.workInProgress{
-		@include pencilify('pencilWIP.png', 0px 179px 0px 141px, 0 163 0 121 fill repeat stretch, 400px);
+		@include pencilify('pencilWIP.png', 0px 65px 0px 51px, 0 65 0 51 fill repeat stretch, 400px);
 	}
 	&.takingABreak{
-		@include pencilify('pencilTakingBreak.png', 0px 163px 0px 121px, 0 179 0 141 fill repeat stretch, 400px);
+		@include pencilify('pencilTakingBreak.png', 0px 75px 0px 57px, 0 75 0 57 fill repeat stretch, 400px);
 	}
 	&.finished{
-		@include pencilify('pencilFinished.png', 0px 154px 0px 121px, 0 154 0 121 fill repeat stretch, 280px);
+		@include pencilify('pencilFinished.png', 0px 64px 0px 50px, 0 64 0 50 fill repeat stretch, 130px);
 	}
 }
 
@@ -280,6 +280,7 @@ footer{
 		display: block;
 		.pencil{
 			margin-bottom: 10px;
+			float: right;
 		}
 		ul{
 			list-style: none;
